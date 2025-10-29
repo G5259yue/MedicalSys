@@ -1,0 +1,10 @@
+/.idea
+/static
+/__pycache__
+/templates
+/web/node_modules
+/prepare_data
+/data
+/dict
+
+/web/.vscode

@@ -1,0 +1,4 @@
+py2neo
+flask
+pymongo
+pyahocorasick
