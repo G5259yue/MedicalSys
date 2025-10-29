@@ -2,3 +2,4 @@ py2neo
 flask
 pymongo
 pyahocorasick
+flask-cors

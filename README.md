@@ -1,7 +1,7 @@
 
 # 改版
 
-# 部署
+# 依赖
 
 ```bash
 #Neo4j linux
@@ -13,7 +13,24 @@ apt install neo4j
 #windows
 https://neo4j.ac.cn/deployment-center/
 ```
+# 部署
+```
+pip install -r requirements.txt
+cd web
+npm install
+vite
+
+cd ..
+cd src
+
+python3 main.py
+```
 
 # todo
 
-那个index.vue的图没调正我整不好ai也搞不定，后面再弄
+那个index.vue的gird没调正我整不好ai也搞不定，后面再弄
+
+# 启动
+```
+cd src
+```
