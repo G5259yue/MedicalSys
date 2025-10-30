@@ -19,18 +19,18 @@ pip install -r requirements.txt
 cd web
 npm install
 vite
-
-cd ..
-cd src
-
-python3 main.py
 ```
 
 # todo
 
-那个index.vue的gird没调正我整不好ai也搞不定，后面再弄
+聊天页，基本美化
 
 # 启动
 ```
 cd src
+python3 main.py
+
+cd ..
+cd web
+npx build
 ```

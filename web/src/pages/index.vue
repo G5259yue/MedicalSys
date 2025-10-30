@@ -26,14 +26,14 @@
         </ul>
       </nav>
     </header> -->
-
+    <Nvabar></Nvabar>
     <!-- 主内容区 -->
     <main class="main-content">
       <section class="hero-section">
         <div class="hero-container">
           <div class="hero-image-box grid--5-cols grid--5-rows">
             <!-- 第一张图片 -->
-            <div class="image-wrapper hero-img-1">
+            <div class="hero-img hero-img-1">
               <img src="/static/img/hero1.png" alt="词汇学习插图1" class="hero-img" />
             </div>
 
@@ -44,7 +44,7 @@
             <p class="weekanddata" v-html="dateStr"></p>
 
             <!-- 第二张图片 -->
-            <div class="image-wrapper hero-img-2">
+            <div class="hero-img hero-img-2">
               <img src="/static/img/hero2.png" alt="词汇学习插图2" class="hero-img" />
             </div>
           </div>
@@ -52,14 +52,14 @@
           <div class="hero-text-box">
             <h1 class="main-title">
               在<span class="highlight">图谱</span>中探索，
-              为你量身定制的医疗专家
+              为你量身定制的医疗助手
             </h1>
             <p class="description">
               基于知识图谱的医疗可视化及问答系统
             </p>
             <div class="action-buttons">
               <router-link to="/chat" class="btn primary-btn">开始使用</router-link>
-              <router-link to="/main" class="btn outline-btn">数据详情</router-link>
+              <router-link to="/main" class="btn outline-btn">数据可视化</router-link>
             </div>
           </div>
         </div>
@@ -76,6 +76,8 @@
 </template>
 
 <script>
+import Nvabar from './nvabar.vue';
+
 export default {
   name: 'HomePage',
   data() {
@@ -87,6 +89,9 @@ export default {
   },
   mounted() {
     this.setDateInfo();
+  },
+  components: {
+    Nvabar
   },
   methods: {
     setDateInfo() {
@@ -133,7 +138,7 @@ body {
   line-height: 1.6;
 }
 
-/* 导航栏 */
+/* 导航栏
 .header {
   display: flex;
   justify-content: space-between;
@@ -176,10 +181,10 @@ body {
 .nav-cta:hover {
   background-color: #339a46;
   color: white;
-}
+} */
 
 /* 搜索框 */
-.search-box {
+/* .search-box {
   display: flex;
   align-items: center;
   background-color: #40c057;
@@ -215,7 +220,7 @@ body {
 .search-box:hover .search-btn {
   background-color: white;
   color: #40c057;
-}
+} */
 
 /* 主内容区 */
 .main-content {
@@ -232,7 +237,7 @@ body {
 .hero-container {
   width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 80px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -242,19 +247,41 @@ body {
 
 
 /* 左侧图片区 */
+
+/* 这啥 */
+
+.img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+
+.grid--5-rows {
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.grid--5-cols {
+  grid-template-columns: 2fr repeat(3, 1fr) 2fr;
+}
+
 .hero-image-box {
   display: grid;
   row-gap: 16px;
   z-index: 0;
 }
 
+.hero-img {
+    width: 100%;
+    border-radius: 9px;
+}
 .image-wrapper {
+  
+  width: 100%;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
 }
 
-.image-wrapper:first-child {
+/* .image-wrapper:first-child {
   grid-column: 1 / 3;
   grid-row: 1 / 2;
 }
@@ -262,22 +289,16 @@ body {
 .image-wrapper:last-child {
   grid-column: 2 / 4;
   grid-row: 2 / 3;
-}
+} */
 
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero-img2 {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  grid-column: 3 / 4;
-  /* 第3列 */
+.hero-img-1 {
   grid-row: 1 / 2;
-  /* 第1行 */
+  grid-column: 1 / 4;
+}
+
+.hero-img-2 {
+  grid-row: 2 / 3;
+  grid-column: 3 / -1;
 }
 
 .date-display {
@@ -297,6 +318,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  grid-row: 1 / 2;
+  grid-column: 4 / -1;
 }
 
 .weekanddata {
@@ -307,11 +330,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  grid-row: 2 / 3;
-  grid-column: 1 / 3;
   margin: 0;
   align-self: end;
   padding-right: 5px;
+  grid-row: 2 / 3;
+  grid-column: 1 / 3;
 }
 
 /* 右侧文本区 */
@@ -321,7 +344,7 @@ body {
 }
 
 .main-title {
-  font-size: 80px;
+  font-size: 74px;
   margin-bottom: 100px;
   line-height: 1.2;
 }

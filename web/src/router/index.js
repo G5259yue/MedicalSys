@@ -13,6 +13,16 @@ const router = createRouter({
       path: '/main',
       name: 'main',
       component: () => import('../pages/main.vue'),
+    },
+    {
+      path: '/introduce',
+      name: 'introduce',
+      component: () => import('../pages/introduce.vue'),
+    },
+    {
+      path: '/chat',
+      name: 'chat',
+      component: () => import('../pages/chat.vue'),
     }
   ],
 })
