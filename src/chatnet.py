@@ -25,7 +25,7 @@ def generate_keyword_links_from_file(file_path):
 
 
 # 指定文件路径
-file_path = './dict/disease.txt'  # 确保路径正确
+file_path = '../dict/disease.txt'  # 确保路径正确
 
 # 生成关键字和链接的映射
 keyword_links = generate_keyword_links_from_file(file_path)

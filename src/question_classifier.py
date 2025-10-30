@@ -4,7 +4,7 @@ import ahocorasick
 
 class QuestionClassifier:
     def __init__(self):
-        cur_dir = '/'.join(os.path.abspath(__file__).split('/')[:-1])
+        cur_dir = '../'.join(os.path.abspath(__file__).split('/')[:-1])
         #　特征词路径
         self.disease_path = os.path.join(cur_dir, 'dict/disease.txt')
         self.department_path = os.path.join(cur_dir, 'dict/department.txt')
