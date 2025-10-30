@@ -16,8 +16,8 @@ def generate_keyword_links_from_file(file_path):
             # 跳过空行
             if not disease:
                 continue
-            # 生成对应的链接，但不直接跳转
-            link = f"http://127.0.0.1:5000/view?search_term={disease}"
+            # 生成对应的链接，改为Vue路由格式
+            link = f"/main?search_term={disease}"
             # 将疾病名称和链接添加到字典中
             keyword_links[disease] = link
 
@@ -45,7 +45,8 @@ class ChatBotGraph:
         for keyword, link in sorted_keywords:
             # 使用\b确保单词边界
             pattern = re.compile(r'\b{}\b'.format(re.escape(keyword)), re.IGNORECASE)
-            text = pattern.sub(f'<a href="{link}" target="_blank">{keyword}</a>', text)
+            # 美化超链接，加class，去掉target，方便前端样式和路由处理
+            text = pattern.sub(f'<a href="{link}" class="vue-link-btn">{keyword}</a>', text)
 
         return text
 
@@ -67,19 +68,19 @@ class ChatBotGraph:
         return '\n'.join(final_answers)  # 将答案合并为一个字符串返回
 
 # Flask应用
-app = Flask(__name__)
+#app = Flask(__name__)
 
 handler = ChatBotGraph()
 
-@app.route('/')
-def index():
-    return render_template('question.html')
+# @app.route('/')
+# def index():
+#     return render_template('question.html')
 
-@app.route('/ask', methods=['POST'])
-def ask():
-    user_message = request.form['user_message']
-    robot_message = handler.chat_main(user_message)
-    return {'user_message': user_message, 'robot_message': robot_message}
+# @app.route('/ask', methods=['POST'])
+# def ask():
+#     user_message = request.form['user_message']
+#     robot_message = handler.chat_main(user_message)
+#     return {'user_message': user_message, 'robot_message': robot_message}
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)

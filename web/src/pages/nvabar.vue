@@ -7,7 +7,7 @@
       <ul class="navbar-list">
         <li><router-link to="/" class="navbar-link">主页</router-link></li>
         <li><router-link to="/introduce" class="navbar-link">介绍</router-link></li>
-        <li><a href="http://localhost:7474" class="navbar-link">数据库</a></li>
+        <li><a href="http://{{ $dburl }}:7474" class="navbar-link">数据库</a></li>
         <li>
           <a href="https://github.com/BaxterL/MedicalSys" class="navbar-link github-link" target="_blank" title="GitHub">
             <i class="fa fa-github"></i>

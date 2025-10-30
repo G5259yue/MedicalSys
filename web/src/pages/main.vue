@@ -39,6 +39,7 @@ export default {
     return {
       diseaseKeyword: "",
       relationList: [
+        { value: "show_all", label: "显示全部", desc: "test" },
         { value: "acompany_with", label: "伴随", desc: "会伴随节点的疾病" },
         { value: "belongs_to", label: "属于", desc: "test" },
         { value: "common_drug", label: "常用药物", desc: "test" },
@@ -48,8 +49,7 @@ export default {
         { value: "need_check", label: "需要检查", desc: "test" },
         { value: "no_eat", label: "忌食", desc: "test" },
         { value: "recommand_drug", label: "推荐药物", desc: "test" },
-        { value: "recommand_eat", label: "推荐饮食", desc: "test" },
-        { value: "show_all", label: "显示全部", desc: "test" }
+        { value: "recommand_eat", label: "推荐饮食", desc: "test" }
       ],
       nodeCount: 0,
       edgeCount: 0,
@@ -72,7 +72,20 @@ export default {
     };
   },
   mounted() {
-    this.fetchGraphData();
+    // 检查路由参数 search_term
+    const searchTerm = this.$route.query.search_term;
+    if (searchTerm) {
+      this.diseaseKeyword = searchTerm;
+      this.fetchGraphData();
+      // 等待渲染后高亮节点
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.highlightNode(searchTerm);
+        }, 800);
+      });
+    } else {
+      this.fetchGraphData();
+    }
   },
   methods: {
     async fetchGraphData() {
@@ -80,7 +93,7 @@ export default {
       let search = this.diseaseKeyword.trim();
       // 上面AI写的我不知道为什么不行真傻逼 删了简化一下
       try {
-        const res = await axios.get(`http://localhost:5000/api/view?search_term=${encodeURIComponent(search)}`);
+        const res = await axios.get(`/api/view?search_term=${encodeURIComponent(search)}`);
         console.log(res);
         if (res.data) {
           this.links = res.data;
@@ -260,6 +273,23 @@ export default {
       const { circle, edges_line } = this.d3Elements;
       this.nodeCount = circle ? circle.filter(function() { return d3.select(this).style("display") !== "none"; }).size() : 0;
       this.edgeCount = edges_line ? edges_line.filter(function() { return d3.select(this).style("display") !== "none"; }).size() : 0;
+    },
+    highlightNode(nodeName) {
+      // 高亮节点（绿色边框/放大）
+      if (!this.d3Elements.circle) return;
+      this.d3Elements.circle.each(function(d) {
+        if (d.name === nodeName) {
+          d3.select(this)
+            .attr('stroke', '#22c55e')
+            .attr('stroke-width', 8)
+            .attr('r', 38);
+        } else {
+          d3.select(this)
+            .attr('stroke', '#fff')
+            .attr('stroke-width', 3)
+            .attr('r', 28);
+        }
+      });
     }
   }
 };

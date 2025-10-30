@@ -13,38 +13,31 @@ password = "20060917"
 #graph = Graph(uri, auth=(username, password))
 graph = Graph(url, auth=(username, password))
 
-# @app.route('/')
-# def index():
-#     return render_template('index.html')
+handler = ChatBotGraph()
 
-@app.route('/api/view')
-def api_view():
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+# 谁家这么写的
+
+@app.route('/view')
+def view():
     search_term = request.args.get('search_term', '')
     links = []
     non_recursive_query(search_term, 3, links)
-    return jsonify(links)
-# 谁家这么写的
-
-# @app.route('/view')
-# def view():
-#     search_term = request.args.get('search_term', '')
-#     links = []
-#     non_recursive_query(search_term, 3, links)
-#     return render_template('view.html', links=links)
+    return render_template('view.html', links=links)
 
 
-# @app.route('/question')
-# def search():
-#     return render_template('question.html')
+@app.route('/question')
+def search():
+    return render_template('question.html')
 
-# @app.route('/ask', methods=['POST'])
-# def ask():
+@app.route('/ask', methods=['POST'])
+def ask():
     user_message = request.form['user_message']
     robot_message = handler.chat_main(user_message)
     return {'user_message': user_message, 'robot_message': robot_message}
 
 if __name__ == '__main__':
-    test = []
-    non_recursive_query("感冒",4,test)
-    print(test)
-    #app.run(debug=True)
+    app.run(debug=True)

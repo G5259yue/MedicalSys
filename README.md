@@ -2,7 +2,6 @@
 # 改版
 
 # 依赖
-
 ```bash
 #Neo4j linux
 wget -O - https://debian.neo4j.com/neotechnology.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/neotechnology.gpg
@@ -20,6 +19,9 @@ cd web
 npm install
 vite
 ```
+## 数据库数据
+
+linux服务器有自己去copy,账号密码群里有
 
 # todo
 

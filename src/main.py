@@ -1,6 +1,7 @@
 from flask import Flask,request,jsonify
 from py2neo import Graph
 from flask_cors import CORS
+from chatnet import ChatBotGraph
 
 app = Flask(__name__)
 CORS(app)
@@ -12,9 +13,11 @@ username = "neo4j"
 password = "20060917"
 graph = Graph(url, auth=(username, password))
 
+handler = ChatBotGraph()
 
 Max_num=200  #可视化界面生成最多的节点数
 depth=3      #递归深度
+
 def non_recursive_query(source, n, links):
     stack = [(source, n)]
     visited = set()  # 记录已经访问过的节点
@@ -54,6 +57,23 @@ def api_view():
     links = []
     non_recursive_query(search_term, 3, links)
     return jsonify(links)
+
+@app.route('/api/ask',methods=['POST'])
+def api_ask():
+    msg = request.form.get('msg')
+    if msg is None:
+        data = request.get_json(silent=True)
+        if data and 'msg' in data:
+            msg = data['msg']
+        else:
+            msg = request.args.get('msg')
+    if not msg:
+        return jsonify({'msg': '', 'res': '未收到问题内容'}), 400
+    res = handler.chat_main(msg)
+    return jsonify({
+        'msg': msg,
+        'res': res
+    }), 200
 
 if __name__ == '__main__':
     # test = []

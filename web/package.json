@@ -15,6 +15,7 @@
     "axios": "^1.13.1",
     "d3": "^7.9.0",
     "vue": "^3.5.22",
+    "vue-renderer-markdown": "^0.0.61-beta.1",
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
